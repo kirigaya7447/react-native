@@ -1,5 +1,5 @@
 {
-  "name": "one_bit_health",
+  "name": "one_bit_health_1",
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
@@ -17,16 +17,5 @@
   "devDependencies": {
     "@babel/core": "^7.20.0"
   },
-  "private": true,
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kirigaya7447/react-native.git"
-  },
-  "author": "joao4774",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/kirigaya7447/react-native/issues"
-  },
-  "homepage": "https://github.com/kirigaya7447/react-native#readme",
-  "description": ""
+  "private": true
 }
