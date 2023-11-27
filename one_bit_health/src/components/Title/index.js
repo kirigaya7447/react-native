@@ -4,7 +4,7 @@ import { View, Text } from "react-native";
 export default function Title() {
     return (
         <View>
-            <Text>One Bith Health</Text>
+            <Text style={{fontSize: 50}}>One Bith Health</Text>
         </View>
     );
 }

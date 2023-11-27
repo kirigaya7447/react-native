@@ -1,43 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, TextInput, Button } from "react-native";
-//import Resultado from "../Resultado/";
+import Resultado from "../Resultado/"
 
-export function Form() {
-    /*const [height, setHeight] = React.useState(null);
-    const [weight, setWeight] = React.useState(null);
-    const [message, setMessage] = React.useState("Preencha o peso e a altura:");
-    const [result, setResult] = React.useState(null);
-    const [textButton, setTextButton] = React.useState("Calcular");
+export default function Form() {
 
-    function valida() {
-        if (weight != null && height != null) {
-            calculaIMC();
-            setMessage = "Seu IMC é:";
-            setTextButton = "Calcular novamente";
-            setWeight = null;
-            setHeight = null;
-        }
-        else {
-            setResult = null;
-            setTextButton = "Calcular";
-            setMessage = "Preencha o peso e a altura!";
-        }
-    }
+    const [altura, setAltura] = useState(null);
+    const [peso, setPeso] = useState(null);
+    const [message, setMessage] = useState("Preencha o peso e a altura!");
+    const [resultadoIMC, setResultadoIMC] = useState(null);
+    const [textButton, setTextButton] = useState("Calcular IMC");
 
     function calculaIMC() {
-        return setResult((weight / (height * height))).toFixed(2); //resultado apenas e 2 casas decimais
-    }*/
+        return setResultadoIMC((peso / (altura * altura)).toFixed(2));
+    }
+
+    function camposVazios() {
+        if (altura != null && peso != null) {
+            calculaIMC();
+            setAltura(null);
+            setPeso(null);
+            setMessage("Seu IMC é:");
+            setTextButton("Calcular novamente");
+            return;
+        } 
+        else {
+            setResultadoIMC(null);
+            setTextButton("Calcular IMC");
+            setMessage("Preencha o peso e a altura!");
+        }
+    }
 
     return (
         <View>
             <View>
                 <Text>Altura:</Text>
-                <TextInput placeholder="Ex:1,75" keyboardType="numeric" /*onChangeText={setHeight} value={height}*/ />
+                <TextInput placeholder="Ex: 1.75" keyboardType="numeric" onChangeText={setAltura} value={altura} />
                 <Text>Peso:</Text>
-                <TextInput placeholder="Ex:50,00" keyboardType="numeric" /*onChangeText={setWeight} value={weight}*/ />
+                <TextInput placeholder="Ex: 50.00" keyboardType="numeric" onChangeText={setPeso} value={peso} />
             </View>
             <View>
-                <Button title="{textButton}" />
+                <Button title={textButton} onPress={() => camposVazios()} />
+                <Resultado message={message} resultadoIMC={resultadoIMC} />
             </View>
         </View>
     );
