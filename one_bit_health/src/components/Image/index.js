@@ -3,16 +3,14 @@ import { View, Image, ScrollView } from "react-native";
 import ImagemName from "./eu.jpeg"
 
 export default function Imagem(){
-    function aa(){
-        for(const a = 0; a < 10; a++){
+    function imagemAparece(){
             return ImagemName;
-        }
     }
 
     return (
         <View>
             <ScrollView>
-            <Image style={{height:200, width:150}} source={aa()}/>
+            <Image style={{height:200, width:150}} source={imagemAparece()}/>
             </ScrollView>
         </View>
     );

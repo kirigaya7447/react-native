@@ -1,7 +1,7 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import Title from "./src/components/Title/";
-import Main from "./src/components/Main/";
+import Form from "./src/components/form/";
 import Imagem from "./src/components/Image/";
 
 export default function App() {
@@ -9,7 +9,7 @@ export default function App() {
     <View style={styles.container}>
       <Title />
       <Imagem />
-      <Main />
+      <Form />
     </View>
   );
 }
@@ -17,9 +17,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
-    alignItems: "center",
-    justifyContent: "center",
-    borderColor: "black",
+    backgroundColor: "#e0e5e5",
+    paddingTop: 50,
   },
 });
