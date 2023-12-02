@@ -5,8 +5,8 @@ const styles = StyleSheet.create({
         width: "100%",
         height: "100%",
         bottom: 0,
-        backGroundColor: "white",
-        allignItems: "center",
+        backgroundColor: "grey",
+        alignItems: "center",
         marginTop: 50,
         borderRadius: 30
     },
@@ -35,9 +35,9 @@ const styles = StyleSheet.create({
     }, 
     button: {
         width: "90%",
-        backGroundColor: "#FF0043",
+        backgroundColor: "white",
         borderRadius: 50,
-        allignItems: "center",
+        alignItems: "center",
         justifyContent: "center",
         paddingTop: 14,
         paddingBottom: 14,
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     },
     textButton: {
         fontSize: 20,
-        color: "#ffffff",
+        color: "black",
 
     }
 });

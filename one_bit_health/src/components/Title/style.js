@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
     boxTitle: {
-        allignItems: "center",
+        alignItems: "center",
         justifyContent: "center",
         padding: 15
     },

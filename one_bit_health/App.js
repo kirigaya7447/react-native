@@ -1,15 +1,17 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, ScrollView } from "react-native";
 import Title from "./src/components/Title/";
-import Form from "./src/components/form/";
+import Form from "./src/components/Form/";
 import Imagem from "./src/components/Image/";
 
 export default function App() {
   return (
     <View style={styles.container}>
       <Title />
-      <Imagem />
-      <Form />
+      <ScrollView>
+        <Imagem />
+        <Form />
+      </ScrollView>
     </View>
   );
 }
@@ -17,7 +19,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#e0e5e5",
+    backgroundColor: "white",
     paddingTop: 50,
   },
 });

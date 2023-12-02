@@ -40,7 +40,6 @@ export default function Form() {
                 <TextInput style={styles.input} placeholder="Ex: 50.00" keyboardType="numeric" onChangeText={setPeso} value={peso} />
             </View>
             <View>
-                <Button title={textButton} onPress={() => camposVazios()} />
                 <TouchableOpacity style={styles.button} onPress = {() => camposVazios()}>
                     <Text style={styles.textButton}>{textButton}</Text>
                 </TouchableOpacity>

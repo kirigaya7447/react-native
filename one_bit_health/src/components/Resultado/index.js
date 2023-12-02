@@ -5,8 +5,7 @@ export default function Resultado(props) {
 
     return (
         <View>
-        <Text>{props.message}</Text>
-        <Text>{props.resultadoIMC}</Text>
+        <Text>{props.message} {props.resultadoIMC}</Text>
         </View>
     );
 }
