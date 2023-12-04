@@ -10,10 +10,13 @@ export default function Form() {
     const [message, setMessage] = useState("Preencha o peso e a altura!");
     const [resultadoIMC, setResultadoIMC] = useState(null);
     const [textButton, setTextButton] = useState("Calcular IMC");
+    const [errorMessage, setError] = useState(null);
 
     function calculaIMC() {
         return setResultadoIMC((peso / (altura * altura)).toFixed(2));
     }
+
+    function camposVaazios
 
     function camposVazios() {
         if (altura != null && peso != null) {
