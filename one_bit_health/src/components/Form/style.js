@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
         width: "90%",
         height: 35,
         borderRadius: 50,
-        backroundColor: "grey",
+        backgroundColor: "grey",
         margin: 12,
         paddingLeft: 15
 
@@ -49,7 +49,13 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: "black",
 
-    }
+    },
+    error: {
+        color: "red",
+        fontSize: 15,
+        fontWeight: "bold",
+        paddingLeft: 20, 
+    },
 });
 
 export default styles;
