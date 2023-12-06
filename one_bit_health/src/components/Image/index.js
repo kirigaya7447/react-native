@@ -10,7 +10,7 @@ export default function Imagem(){
     return (
         <View>
             <ScrollView>
-            <Image style={{height: 200, width: 150, alignItems: "center", justifyContent: "center", marginLeft: 50}} source={imagemAparece()}/>
+            <Image style={{height: 200, width: 150, marginLeft: "auto", marginRight: "auto",}} source={imagemAparece()}/>
             </ScrollView>
         </View>
     );

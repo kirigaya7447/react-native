@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, Vibration } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, Vibration, Keyboard, Pressable } from "react-native";
 import Resultado from "../Resultado/";
 import styles from "./style";
 
@@ -15,7 +15,8 @@ export default function Form() {
     const [errorPeso, setErrorPeso] = useState(null);
 
     function calculaIMC() {
-        setResultadoIMC((peso / (altura * altura)).toFixed(2));
+        let alturaFormatada = altura.replace(",", ".");
+        setResultadoIMC((peso / (alturaFormatada * alturaFormatada)).toFixed(2));
         if (resultadoIMC < 18.5) {
             setTipo("Magreza extrema");
         }
@@ -69,13 +70,14 @@ export default function Form() {
         else {
             camposVazios();
             setResultadoIMC(null);
+            setTipo(null);
             setTextButton("Calcular IMC");
             setMessage("Preencha o peso e a altura!");
         }
     }
 
     return (
-        <View style={styles.formBody}>
+        <Pressable onPress={Keyboard.dismiss} style={styles.formBody}>
             <View style={styles.formText}>
                 <Text style={styles.formLabel}>Altura:</Text>
                 <Text style={styles.error}>{errorAltura}</Text>
@@ -84,12 +86,12 @@ export default function Form() {
                 <Text style={styles.error}>{errorPeso}</Text>
                 <TextInput style={styles.input} placeholder="Ex: 50.00" keyboardType="numeric" onChangeText={setPeso} value={peso} />
             </View>
-            <View>
                 <TouchableOpacity style={styles.button} onPress={() => verificaCalcula()}>
                     <Text style={styles.textButton}>{textButton}</Text>
                 </TouchableOpacity>
-                <Resultado message={message} resultadoIMC={resultadoIMC} tipo={tipoIMC}/>
+            <View>
+                <Resultado message={message} resultadoIMC={resultadoIMC} tipo={tipoIMC} />
             </View>
-        </View>
+        </Pressable>
     );
 }
