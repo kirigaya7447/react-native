@@ -5,7 +5,7 @@ import styles from "./style";
 export default function Resultado(props) {
 
     const compartilhar = async () => {
-        const resultado = await Share.share({message: "Veja só o meu app criado com o React Native. Este é o resultado do meu IMC, que é: " + props.resultadoIMC + " e estou classificado como: " + props.tipo});
+        const resultado = await Share.share({message: `${"Veja só o meu app criado com o React Native. Este é o resultado do meu IMC, que é: "}` `${props.resultadoIMC}`  `${" e estou classificado como: "}` `${props.tipo}`});
     };
 
     return (
