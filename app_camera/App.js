@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { View, StyleSheet, SafeAreaView, Button } from "react-native";
+import { View, StyleSheet, SafeAreaView, Button, Modal, Image } from "react-native";
 import { Camera } from "expo-camera";
-import { CameraType } from "expo-camera/build/Camera.types";
 import { FontAwesome } from "@expo/vector-icons";
 
 export default function App() {
@@ -10,6 +9,7 @@ export default function App() {
     const [permissao, setPermissao] = useState(null);
     const camera = useRef(null);
     const [fotoTirada, setFotoTirada] = useState(null);
+    const [abreFoto, setAbre] = useState(false);
 
     useEffect(() => {
         (async () => {
@@ -32,20 +32,31 @@ export default function App() {
 
             const data = await camera.current.takePictureAsync();
             setFotoTirada(data.uri);
+            console.log(data);
+            setAbre(true);
         }
     }
 
     return (
         <SafeAreaView style={styles.container}>
-            <Camera type={tipo} style={styles.camera}></Camera>
-            <View style={styles.viewButton}>
-                <Button style={styles.buttonFlip} title="Câmera" onPress={() => { setTipo(tipo === Camera.Constants.Type.back ? Camera.Constants.Type.front : Camera.Constants.Type.back) }}>
-                    <FontAwesome name="exchange" size={24} color="red" />
-                </Button>
-                <Button style={styles.buttonTiraFoto} title="Tirar foto" onPress={pegaFoto()} >
-                <FontAwesome name="camera" size={24} color="#fff" />
-                </Button>
-            </View>
+            <Camera type={tipo} style={styles.camera} ref={camera}>
+                <View style={styles.viewButton}>
+                    <Button style={styles.buttonFlip} title="Câmera" onPress={() => { setTipo(tipo === Camera.Constants.Type.back ? Camera.Constants.Type.front : Camera.Constants.Type.back) }}>
+                        <FontAwesome name="exchange" size={24} color="red" />
+                    </Button>
+                    <Button style={styles.buttonTiraFoto} title="Tirar foto" onPress={pegaFoto()} >
+                        <FontAwesome name="camera" size={24} color="#fff" />
+                    </Button>
+                </View>
+            </Camera>
+            {
+                fotoTirada && abreFoto ? <Modal animate="slide" transparent={true} visible={abreFoto}>
+                    <View style={styles.contentModal}>
+                        <Image></Image>
+                    </View>
+                </Modal>
+                    : <View />
+            }
         </SafeAreaView>
     );
 }
@@ -93,5 +104,8 @@ const styles = StyleSheet.create({
         justifyContents: "center",
         margin: 20,
         borderRadius: 40,
+    },
+    contentModal: {
+
     },
 });
