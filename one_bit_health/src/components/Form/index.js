@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, Vibration, Keyboard, Pressable } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, Vibration, Keyboard, Pressable, FlatList } from "react-native";
 import Resultado from "../Resultado/";
 import styles from "./style";
 
@@ -13,25 +13,31 @@ export default function Form() {
     const [textButton, setTextButton] = useState("Calcular IMC");
     const [errorAltura, setErrorAlt] = useState(null);
     const [errorPeso, setErrorPeso] = useState(null);
+    const [listaIMC, setLista] = useState([]);
 
     function calculaIMC() {
         let alturaFormatada = altura.replace(",", ".");
-        setResultadoIMC((peso / (alturaFormatada * alturaFormatada)).toFixed(2));
-        if (resultadoIMC < 18.5) {
-            setTipo("Magreza extrema");
+        let imc = (peso / (alturaFormatada * alturaFormatada)).toFixed(2);
+        let tipo = null;
+        setResultadoIMC(imc);
+        if (imc < 18.5) {
+            tipo = "Magreza extrema";
         }
-        else if (resultadoIMC > 18.5 && resultadoIMC < 24.9) {
-            setTipo("Normal");
+        else if (imc > 18.5 && imc < 24.9) {
+            tipo = "Normal";
         }
-        else if (resultadoIMC > 25 && resultadoIMC < 29.9) {
-            setTipo("Sobrepeso");
+        else if (imc > 25 && imc < 29.9) {
+            tipo = "Sobrepeso";
         }
-        else if (resultadoIMC > 30 && resultadoIMC < 39.9) {
-            setTipo("Obesidade");
+        else if (imc > 30 && imc < 39.9) {
+            tipo = "Obesidade";
         }
-        else if (resultadoIMC > 40) {
-            setTipo("Obesidade grave");
+        else if (imc > 40) {
+            tipo = "Obesidade grave";
         }
+
+        setTipo(tipo);
+        setLista((arr) => [...arr, { id: new Date().getTime(), imc: imc, tipo: tipo }]);
         return resultadoIMC;
     }
 
@@ -64,7 +70,7 @@ export default function Form() {
             setErrorPeso(null);
             setAltura(null);
             setPeso(null);
-            setMessage("Seu IMC é:");
+            setMessage("O seu IMC é:");
             setTextButton("Calcular novamente");
         }
         else {
@@ -77,21 +83,35 @@ export default function Form() {
     }
 
     return (
-        <Pressable onPress={Keyboard.dismiss} style={styles.formBody}>
-            <View style={styles.formText}>
-                <Text style={styles.formLabel}>Altura:</Text>
-                <Text style={styles.error}>{errorAltura}</Text>
-                <TextInput style={styles.input} placeholder="Ex: 1.75" keyboardType="numeric" onChangeText={setAltura} value={altura} />
-                <Text style={styles.formLabel}>Peso:</Text>
-                <Text style={styles.error}>{errorPeso}</Text>
-                <TextInput style={styles.input} placeholder="Ex: 50.00" keyboardType="numeric" onChangeText={setPeso} value={peso} />
-            </View>
-                <TouchableOpacity style={styles.button} onPress={() => verificaCalcula()}>
-                    <Text style={styles.textButton}>{textButton}</Text>
-                </TouchableOpacity>
-            <View>
-                <Resultado message={message} resultadoIMC={resultadoIMC} tipo={tipoIMC} />
-            </View>
-        </Pressable>
+        <View style={styles.formBody}>
+            {resultadoIMC == null ?
+                <Pressable onPress={Keyboard.dismiss} style={styles.formText}>
+                    <View>
+                        <Text style={styles.formLabel}>Altura:</Text>
+                        <Text style={styles.error}>{errorAltura}</Text>
+                        <TextInput style={styles.input} placeholder="Ex: 1.75" keyboardType="numeric" onChangeText={setAltura} value={altura} />
+                        <Text style={styles.formLabel}>Peso:</Text>
+                        <Text style={styles.error}>{errorPeso}</Text>
+                        <TextInput style={styles.input} placeholder="Ex: 50.00" keyboardType="numeric" onChangeText={setPeso} value={peso} />
+                    </View>
+                    <TouchableOpacity style={styles.button} onPress={() => verificaCalcula()}>
+                        <Text style={styles.textButton}>{textButton}</Text>
+                    </TouchableOpacity>
+                </Pressable>
+                :
+                <View style={styles.formResult}>
+                    <TouchableOpacity style={styles.button} onPress={() => verificaCalcula()}>
+                        <Text style={styles.textButton}>{textButton}</Text>
+                    </TouchableOpacity>
+                    <Resultado message={message} resultadoIMC={resultadoIMC} tipo={tipoIMC} />
+                </View>}
+            <FlatList data={listaIMC.reverse()} renderItem={({ item }) => {
+                return (
+                    <View>
+                        <Text style={styles.lista}>IMC: {item.imc}</Text>
+                        <Text style={styles.lista}>Classificação: {item.tipo}</Text>
+                    </View>)
+            }} keyExtractor={(item) => {item.id}}/>
+        </View>
     );
 }

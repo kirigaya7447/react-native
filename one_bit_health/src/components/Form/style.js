@@ -26,8 +26,16 @@ const styles = StyleSheet.create({
         paddingLeft: 20,
     }, 
 
+    formResult:{
+        width: "100%",
+        hwight: "50%",
+        marginTop: 5,
+        aliigntItems: "center",
+        fontSize: 22,
+    },
+
     input: {
-        width: "90%",
+        width: "100%",
         height: 35,
         borderColor: "white",
         borderWidth: 1,
@@ -58,6 +66,12 @@ const styles = StyleSheet.create({
         fontSize: 15,
         fontWeight: "bold",
         paddingLeft: 20, 
+    },
+    lista:{
+        color: "white",
+        fontSize: 18,
+        marginTop: 5,
+        width: "100%",
     },
 });
 
