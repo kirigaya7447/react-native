@@ -83,6 +83,15 @@ const styles = StyleSheet.create({
         borderRadius: 40,
     },
     buttonTiraFoto: {
-
+        height: 50,
+        width: 50,
+        backgroundColor: "red",
+        position: "absolute",
+        bottom: 50,
+        right: 30,
+        alignItems: "center",
+        justifyContents: "center",
+        margin: 20,
+        borderRadius: 40,
     },
 });
