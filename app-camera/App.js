@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { View, StyleSheet, SafeAreaView, Button, Modal, Image } from "react-native";
+import { View, StyleSheet, SafeAreaView, TouchableOpacity, Modal, Image } from "react-native";
 import { Camera } from "expo-camera";
 import { FontAwesome } from "@expo/vector-icons";
 
@@ -41,12 +41,12 @@ export default function App() {
     <SafeAreaView style={styles.container}>
       <Camera type={tipo} style={styles.camera} ref={camera}>
         <View style={styles.viewButton}>
-          <Button style={styles.buttonFlip} title="Câmera" onPress={() => { setTipo(tipo === Camera.Constants.Type.back ? Camera.Constants.Type.front : Camera.Constants.Type.back) }}>
+          <TouchableOpacity style={styles.buttonTroca} title="Câmera" onPress={() => { setTipo(tipo === Camera.Constants.Type.back ? Camera.Constants.Type.front : Camera.Constants.Type.back) }}>
             <FontAwesome name="exchange" size={24} color="red" />
-          </Button>
-          <Button style={styles.buttonTiraFoto} title="Tirar foto" onPress={pegaFoto()} >
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.buttonTiraFoto} title="Tirar foto" onPress={pegaFoto} >
             <FontAwesome name="camera" size={24} color="#fff" />
-          </Button>
+          </TouchableOpacity>
         </View>
       </Camera>
       {
@@ -55,7 +55,7 @@ export default function App() {
             <Image></Image>
           </View>
         </Modal>
-          : <View />
+          : <Text>Error #*$&$&$&%&45654654#$$%%$</Text>
       }
     </SafeAreaView>
   );
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     flexDirection: "row",
   },
-  buttonFlip: {
+  buttonTroca: {
     height: 50,
     width: 50,
     backgroundColor: "#fff",
@@ -89,9 +89,9 @@ const styles = StyleSheet.create({
     bottom: 50,
     left: 30,
     alignItems: "center",
-    justifyContents: "center",
     margin: 20,
-    borderRadius: 40,
+    padding: 10,
+    borderRadius: 50,
   },
   buttonTiraFoto: {
     height: 50,
@@ -101,9 +101,9 @@ const styles = StyleSheet.create({
     bottom: 50,
     right: 30,
     alignItems: "center",
-    justifyContents: "center",
     margin: 20,
-    borderRadius: 40,
+    padding: 10,
+    borderRadius: 50,
   },
   contentModal: {
 
