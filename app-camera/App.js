@@ -32,7 +32,6 @@ export default function App() {
 
       const data = await camera.current.takePictureAsync();
       setFotoTirada(data.uri);
-      console.log(data);
       setAbre(true);
     }
   }
@@ -50,12 +49,14 @@ export default function App() {
         </View>
       </Camera>
       {
-        fotoTirada && abreFoto ? <Modal animate="slide" transparent={true} visible={abreFoto}>
+        fotoTirada && (<Modal animationType="slide" transparent={true} visible={abreFoto}>
+          <TouchableOpacity style={styles.botaoFecharFoto} onPress={() => { setAbre(false) }}>
+            <FontAwesome name="close" size={50} color="blue" />
+          </TouchableOpacity>
           <View style={styles.contentModal}>
-            <Image></Image>
+            <Image style={styles.imagemFoto} source={{ uri: fotoTirada }} />
           </View>
-        </Modal>
-          : <Text>Error #*$&$&$&%&45654654#$$%%$</Text>
+        </Modal>)
       }
     </SafeAreaView>
   );
@@ -106,6 +107,20 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
   contentModal: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "flex-end",
+    margin: 20,
 
+  },
+  botaoFecharFoto:{
+    position: "absolute",
+    top: 10,
+    left: 2,
+    margin: 10,
+  },
+  imagemFoto:{
+    width: "100%",
+    height: 400,
   },
 });
