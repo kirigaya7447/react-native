@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { View, StyleSheet, SafeAreaView, TouchableOpacity, Modal, Image } from "react-native";
+import stylesImport from "./style";
 import { Camera } from "expo-camera";
 import { FontAwesome } from "@expo/vector-icons";
 
@@ -24,7 +25,7 @@ export default function App() {
   }
 
   else if (permissao === false) {
-    return <View><Text style={styles.siFudeu}>Acesso negado!</Text></View>;
+    return <View><Text style={stylesImport.siFudeu}>Acesso negado!</Text></View>;
   }
 
   async function pegaFoto() {
@@ -38,23 +39,23 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Camera type={tipo} style={styles.camera} ref={camera}>
-        <View style={styles.viewButton}>
-          <TouchableOpacity style={styles.buttonTroca} title="Câmera" onPress={() => { setTipo(tipo === Camera.Constants.Type.back ? Camera.Constants.Type.front : Camera.Constants.Type.back) }}>
+      <Camera type={tipo} style={stylesImport.camera} ref={camera}>
+        <View style={stylesImport.viewButton}>
+          <TouchableOpacity style={stylesImport.buttonTroca} title="Câmera" onPress={() => { setTipo(tipo === Camera.Constants.Type.back ? Camera.Constants.Type.front : Camera.Constants.Type.back) }}>
             <FontAwesome name="exchange" size={24} color="red" />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonTiraFoto} title="Tirar foto" onPress={pegaFoto} >
+          <TouchableOpacity style={stylesImport.buttonTiraFoto} title="Tirar foto" onPress={pegaFoto} >
             <FontAwesome name="camera" size={24} color="#fff" />
           </TouchableOpacity>
         </View>
       </Camera>
       {
         fotoTirada && (<Modal animationType="slide" transparent={true} visible={abreFoto}>
-          <TouchableOpacity style={styles.botaoFecharFoto} onPress={() => { setAbre(false) }}>
+          <TouchableOpacity style={stylesImport.botaoFecharFoto} onPress={() => { setAbre(false) }}>
             <FontAwesome name="close" size={50} color="blue" />
           </TouchableOpacity>
-          <View style={styles.contentModal}>
-            <Image style={styles.imagemFoto} source={{ uri: fotoTirada }} />
+          <View style={stylesImport.contentModal}>
+            <Image style={stylesImport.imagemFoto} source={{ uri: fotoTirada }} />
           </View>
         </Modal>)
       }
@@ -68,59 +69,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "white",
     paddingTop: 15,
-  },
-  camera: {
-    width: "100%",
-    height: "100%",
-  },
-  siFudeu: {
-    color: "red",
-    fontSize: 45,
-  },
-  viewButton: {
-    flex: 1,
-    backgroundColor: "transparent",
-    flexDirection: "row",
-  },
-  buttonTroca: {
-    height: 50,
-    width: 50,
-    backgroundColor: "#fff",
-    position: "absolute",
-    bottom: 50,
-    left: 30,
-    alignItems: "center",
-    margin: 20,
-    padding: 10,
-    borderRadius: 50,
-  },
-  buttonTiraFoto: {
-    height: 50,
-    width: 50,
-    backgroundColor: "red",
-    position: "absolute",
-    bottom: 50,
-    right: 30,
-    alignItems: "center",
-    margin: 20,
-    padding: 10,
-    borderRadius: 50,
-  },
-  contentModal: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "flex-end",
-    margin: 20,
-
-  },
-  botaoFecharFoto:{
-    position: "absolute",
-    top: 10,
-    left: 2,
-    margin: 10,
-  },
-  imagemFoto:{
-    width: "100%",
-    height: 400,
-  },
+  }
 });
