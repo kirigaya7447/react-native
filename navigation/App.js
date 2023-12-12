@@ -9,23 +9,23 @@ import AppContacts from "./src/pages/AppContacts";
 const navega = createStackNavigator();
 const botoesNav = createBottomTabNavigator();
 
-function tabNavigation(){
-  return (
+function TabNavigation() {
+  return (  
     <botoesNav.Navigator>
-        <botoesNav.Screen name="AppContacts" component={AppContacts}/>
-        <botoesNav.Screen name="Contacts" component={Contacts}/>
-      </botoesNav.Navigator>
-  ); 
+      <botoesNav.Screen name="AppContacts" component={AppContacts} />
+      <botoesNav.Screen name="Contacts" component={Contacts} />
+    </botoesNav.Navigator>
+  );
 }
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <navega.Navigator>
-        <navega.Screen name="AppContacts" component={tabNavigation} />
-        <navega.Screen name="Informations" component={Informations} />
-      </navega.Navigator>
-    </NavigationContainer>
+      <NavigationContainer>
+        <navega.Navigator>
+          <navega.Screen name="App" component={TabNavigation} />
+          <navega.Screen name="Informations" component={Informations} />
+        </navega.Navigator>
+      </NavigationContainer>
   );
 }
 
