@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, Image } from "react-native";
-import image from "./pinto.jpg";
+import image from "../../icons/pinto.jpg";
 
 export default function AppContacts() {
     return (

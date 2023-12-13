@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Image } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -14,7 +14,7 @@ function TabNavigation() {
   return (
     <botoesNav.Navigator>
       <botoesNav.Screen name="AppContacts" component={AppContacts} options={{tabBarLabel: "Página Inicial", tabBarIcon: () => (<FontAwesome name="home" size={25} color="black"/>),}}/>
-      <botoesNav.Screen name="Contacts" component={Contacts} options={{tabBarLabel: "Contatos", tabBarIcon: () => (<FontAwesome name="coffee" size={23} color="black"/>),}}/>
+      <botoesNav.Screen name="Contacts" component={Contacts} options={{tabBarLabel: "Contatos", tabBarIcon: () => (<Image source={require("./src/icons/dedao.png")} style={{height: 30, width: 35, borderRadius: 30,}}/>),}}/>
     </botoesNav.Navigator>
   );
 }
