@@ -18,7 +18,8 @@ function url(dias) {
   const ultimoDia = `2021-${colocaZero(data.getMonth() + 1)}-${colocaZero(data.getDay())}`;
   data.setDate(data.getDate() - dias);
   const primeiroDia = `2021-${colocaZero(data.getMonth() + 1)}-${colocaZero(data.getDay())}`;
-  return "https://api.coindesk.com/v1/bpi/historical/close.json?start=" + primeiroDia + "&end=" + ultimoDia;
+  console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA:" + "https://api.coindesk.com/v1/bpi/historical/close.json?start=" + primeiroDia + "&end=" + ultimoDia);
+  return `https://api.coindesk.com/v1/bpi/historical/close.json?start=${primeiroDia}&end=${ultimoDia}`;
 }
 
 async function fazPesquisa(url) {
