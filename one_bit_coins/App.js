@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, SafeAreaView, Platform, StatusBar } from "react
 import CurrentPrice from "./src/components/CurrentPrice/";
 import HistoryGraphics from "./src/components/HistoryGraphics/";
 import QuotationList from "./src/components/QuotationList/";
-import QuotationItems from "./src/components/QuotationList/QuotationItems/";
 
 //https://api.coindesk.com/v1/bpi/historical/close.json?start=2021-09-01&end=2021-09-05
 function colocaZero(valor) {
@@ -14,12 +13,14 @@ function colocaZero(valor) {
 }
 
 function url(qntDias) {
+  let link;
   const data = new Date();
   colocaZero();
   const ultimoDia = `2021-${colocaZero(data.getMonth() + 1)}-${colocaZero(data.getDay())}`;
   data.setDate(data.getDate() - qntDias);
   const primeiroDia = `2021-${colocaZero(data.getMonth() + 1)}-${colocaZero(data.getDay())}`;
-  return `https://api.coindesk.com/v1/bpi/historical/close.json?start=${primeiroDia}&end=${ultimoDia}`;
+  link = `https://api.coindesk.com/v1/bpi/historical/close.json?start=${primeiroDia}&end=${ultimoDia}`;
+  return link;
 }
 
 async function fazPesquisa(url) {
@@ -32,8 +33,8 @@ async function fazPesquisa(url) {
       valor: selecionaQuotacao[key]
     };
   });
-  let data = queryCotacao.reverse();
-  return data;
+  let pesquisa = queryCotacao.reverse();
+  return pesquisa;
 }
 
 async function fazPesquisaGrafico(url) {
@@ -41,15 +42,16 @@ async function fazPesquisaGrafico(url) {
   let retornaApi = await resposta.json();
   let selecionaQuotacao = retornaApi.bpi;
   const queryCotacao = Object.keys(selecionaQuotacao).map((key) => {
-    selecionaQuotacao[key];
+    return selecionaQuotacao[key];
   });
-  let dataGrafico = queryCotacao.reverse();
-  return dataGrafico;
+  let pesquisaGrafico = queryCotacao;
+  return pesquisaGrafico;
 }
 
 export default function App() {
   const [listaValor, setListaValor] = useState([]);
   const [listaGrafico, setListaGrafico] = useState([0]);
+  const [intervaloTexto, setIntervaloTexto] = useState("Último mês");
   const [dias, setDias] = useState(30);
   const [atualizaData, setAtualizaData] = useState(true);
 
@@ -57,14 +59,35 @@ export default function App() {
   function atualizaDias(valor) {
     setDias(valor);
     setAtualizaData(true);
+    switch (valor) {
+      case 7:
+        setIntervaloTexto("Última semana:");
+        break;
+
+      case 15:
+        setIntervaloTexto("Últimas 2 semanas:");
+        break;
+
+      case 30:
+        setIntervaloTexto("Último mês:");
+        break;
+
+      case 85:
+        setIntervaloTexto("Últimos 3 meses:");
+        break;
+
+      case 180:
+        setIntervaloTexto("Últimos 6 meses:");
+        break;
+    }
   }
 
   useEffect(() => {
     fazPesquisa(url(dias)).then((data) => {
-      setListaValor(data)
+      setListaValor(data);
     });
     fazPesquisaGrafico(url(dias)).then((dataGrafico) => {
-      setListaGrafico(dataGrafico)
+      setListaGrafico(dataGrafico);
     });
 
     if (atualizaData) {
@@ -76,10 +99,9 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor="green" barStyle="light-content" />
-      <CurrentPrice />
-      <HistoryGraphics />
-      <QuotationList />
-      <QuotationItems />
+      <CurrentPrice intervaloDias={intervaloTexto} />
+      <HistoryGraphics graficoData={listaGrafico} />
+      <QuotationList filtro={atualizaDias} lista={listaValor} />
     </SafeAreaView>
   );
 }
