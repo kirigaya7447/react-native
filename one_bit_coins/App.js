@@ -10,15 +10,15 @@ function colocaZero(valor) {
   if (valor <= 9) {
     valor = "0" + valor;
   }
+  return valor;
 }
 
-function url(dias) {
+function url(qntDias) {
   const data = new Date();
   colocaZero();
   const ultimoDia = `2021-${colocaZero(data.getMonth() + 1)}-${colocaZero(data.getDay())}`;
-  data.setDate(data.getDate() - dias);
+  data.setDate(data.getDate() - qntDias);
   const primeiroDia = `2021-${colocaZero(data.getMonth() + 1)}-${colocaZero(data.getDay())}`;
-  console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA:" + "https://api.coindesk.com/v1/bpi/historical/close.json?start=" + primeiroDia + "&end=" + ultimoDia);
   return `https://api.coindesk.com/v1/bpi/historical/close.json?start=${primeiroDia}&end=${ultimoDia}`;
 }
 
@@ -26,50 +26,51 @@ async function fazPesquisa(url) {
   let resposta = await fetch(url);
   let retornaApi = await resposta.json();
   let selecionaQuotacao = retornaApi.bpi;
-  const query = Object.keys(selecionaQuotacao).map((key) => {
+  const queryCotacao = Object.keys(selecionaQuotacao).map((key) => {
     return {
       data: key.split("-").reverse().join("/"),
       valor: selecionaQuotacao[key]
-    };});
-  let data = query.reverse();
-  console.log(data);
+    };
+  });
+  let data = queryCotacao.reverse();
+  return data;
 }
 
 async function fazPesquisaGrafico(url) {
   let resposta = await fetch(url);
   let retornaApi = await resposta.json();
   let selecionaQuotacao = retornaApi.bpi;
-  const query = Object.keys(selecionaQuotacao).map((key) => {
+  const queryCotacao = Object.keys(selecionaQuotacao).map((key) => {
     selecionaQuotacao[key];
   });
-  let dataGrafico = query;
-  console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" + dataGrafico);
+  let dataGrafico = queryCotacao.reverse();
+  return dataGrafico;
 }
 
 export default function App() {
   const [listaValor, setListaValor] = useState([]);
-  const [listaGrafico, setGrafico] = useState([0]);
+  const [listaGrafico, setListaGrafico] = useState([0]);
   const [dias, setDias] = useState(30);
-  const [listaAtualizaData, setAtualizaData] = useState(true);
+  const [atualizaData, setAtualizaData] = useState(true);
 
 
-function atualizaDias(valor){
-  setDias(valor);
-  setAtualizaData(true);
-}
+  function atualizaDias(valor) {
+    setDias(valor);
+    setAtualizaData(true);
+  }
 
-useEffect(() => {
-fazPesquisa(url(dias)).then((data) => {
-  setListaValor(data)
-});
-fazPesquisaGrafico(url(dias)).then((dataGrafico) => {
-  setGrafico(dataGrafico)
-});
+  useEffect(() => {
+    fazPesquisa(url(dias)).then((data) => {
+      setListaValor(data)
+    });
+    fazPesquisaGrafico(url(dias)).then((dataGrafico) => {
+      setListaGrafico(dataGrafico)
+    });
 
-if(listaAtualizaData){
-  setAtualizaData(false);
-}
-}, [listaAtualizaData]);
+    if (atualizaData) {
+      setAtualizaData(false);
+    }
+  }, [atualizaData]);
 
 
   return (
