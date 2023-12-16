@@ -6,7 +6,7 @@ export default function CurrentPrice(){
     return (
         <View style={styles.headerPrice}>
             <Text style={styles.currentPrice}>$100000</Text>
-            <Text style={styles.textPrice}>Preço da última cotação</Text>
+            <Text style={styles.textPrice}>Preço da cotação referente a 2021</Text>
         </View>
     );
 }

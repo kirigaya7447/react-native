@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     },
     textPrice:{
         color: "blue",
-        fontSize: 25,
+        fontSize: 24,
         fontWeight: "bold",
     },
 });
