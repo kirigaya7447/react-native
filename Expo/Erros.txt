@@ -1,0 +1,3 @@
+sudo npm install punycode --save
+npx expo install --fix
+https://www.youtube.com/watch?v=s833JrzkfII
