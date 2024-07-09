@@ -1,3 +1,52 @@
 sudo npm install punycode --save
 npx expo install --fix
 https://www.youtube.com/watch?v=s833JrzkfII
+
+____________________________________________
+Comandos executados para instalação:
+
+543  sudo curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+  544  nvm -v
+  545  cd ~
+  546  sudo curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+  547  sudo nvm -v
+  548  nvm install 20
+  549  sudo nvm install 20
+  550  cd ~
+  551  sudo /opt/lampp/lampp status
+  552  sudo /opt/lampp/lampp start
+  553  npx expo start --tunel
+  554  npx expo start --tunnel
+  555  npx expo start --tunel
+  556  npx expo start --tunnel
+  557  sudo npx expo start --tunnel
+  558  cd ~
+  559  nvm install 20
+  560  nvm --version
+  561  sudo nvm --version
+  562  node --version
+  563  sudo node --version
+  564  npm --version
+  565  sudo zypper update git
+  566  npm install -g expo-cli
+  567  expo --version
+  568  nvm install 17.0.0
+  569  nvm ls
+  570  nvm uninstall 20.15.1
+  571  nvm ls
+  572  nvm use 17.0.0
+  573  nvm ls
+  574  expo --version
+  575  npm install -g expo-cli
+  576  cd Área\ de\ trabalho/GitHub/react-native/Expo/one_bit_health/
+  577  npm init
+  578  npm start
+  579  npm install -g expo-status-bar@1.12.1
+  580  npm start
+  581  expo update
+  582  npx expo update
+  583  sudo npx expo update
+  584  sudo expo update
+  585  expo update
+  586  npm start
+  587  history
